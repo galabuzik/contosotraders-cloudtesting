@@ -265,7 +265,7 @@ resource kv 'Microsoft.KeyVault/vaults@2022-07-01' = {
       tags: resourceTags
       properties: {
         contentType: 'endpoint url (fqdn) of the (internal) carts api'
-        value: deployPrivateEndpoints ? cartsinternalapiaca.properties.configuration.ingress.fqdn : ''
+        value: deployPrivateEndpoints ? cartsinternalapiaca!.properties.configuration.ingress.fqdn : ''
       }
     }
 
@@ -316,7 +316,7 @@ resource kv 'Microsoft.KeyVault/vaults@2022-07-01' = {
       tags: resourceTags
       properties: {
         contentType: 'subnet id of the aca subnet'
-        value: deployPrivateEndpoints ? vnet.properties.subnets[0].id : ''
+        value: deployPrivateEndpoints ? vnet!.properties.subnets[0].id : ''
       }
     }
 
