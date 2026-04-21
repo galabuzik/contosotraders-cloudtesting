@@ -1424,7 +1424,7 @@ resource jumpboxnic 'Microsoft.Network/networkInterfaces@2022-07-01' =
             primary: true
             privateIPAllocationMethod: 'Dynamic'
             subnet: {
-              id: deployPrivateEndpoints ? vnet.properties.subnets[1].id : ''
+              id: deployPrivateEndpoints ? vnet!.properties.subnets[1].id : ''
             }
             publicIPAddress: {
               id: deployPrivateEndpoints ? jumpboxpublicip.id : ''
@@ -1518,7 +1518,7 @@ module privateDnsZone './createPrivateDnsZone.bicep' =
       privateDnsZoneARecordName: deployPrivateEndpoints
         ? join(take(split(cartsinternalapiaca!.properties.configuration.ingress.fqdn, '.'), 2), '.')
         : ''
-      privateDnsZoneARecordIp: deployPrivateEndpoints ? cartsinternalapiacaenv.properties.staticIp : ''
+      privateDnsZoneARecordIp: deployPrivateEndpoints ? cartsinternalapiacaenv!.properties.staticIp : ''
       resourceTags: resourceTags
     }
   }
