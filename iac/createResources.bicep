@@ -1511,12 +1511,12 @@ module privateDnsZone './createPrivateDnsZone.bicep' =
     name: 'createPrivateDnsZone'
     params: {
       privateDnsZoneName: deployPrivateEndpoints
-        ? join(skip(split(cartsinternalapiaca.properties.configuration.ingress.fqdn, '.'), 2), '.')
+        ? join(skip(split(cartsinternalapiaca!.properties.configuration.ingress.fqdn, '.'), 2), '.')
         : ''
       privateDnsZoneVnetId: deployPrivateEndpoints ? vnet.id : ''
       privateDnsZoneVnetLinkName: privateDnsZoneVnetLinkName
       privateDnsZoneARecordName: deployPrivateEndpoints
-        ? join(take(split(cartsinternalapiaca.properties.configuration.ingress.fqdn, '.'), 2), '.')
+        ? join(take(split(cartsinternalapiaca!.properties.configuration.ingress.fqdn, '.'), 2), '.')
         : ''
       privateDnsZoneARecordIp: deployPrivateEndpoints ? cartsinternalapiacaenv.properties.staticIp : ''
       resourceTags: resourceTags
@@ -1535,7 +1535,7 @@ resource cartsinternalapiacaenv 'Microsoft.App/managedEnvironments@2022-06-01-pr
     properties: {
       zoneRedundant: false
       vnetConfiguration: {
-        infrastructureSubnetId: deployPrivateEndpoints ? vnet.properties.subnets[0].id : ''
+        infrastructureSubnetId: deployPrivateEndpoints ? vnet!.properties.subnets[0].id : ''
         internal: true
       }
     }
